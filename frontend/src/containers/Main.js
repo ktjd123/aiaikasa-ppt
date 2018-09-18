@@ -1,37 +1,42 @@
 import React, { Component } from 'react';
-import { toast } from 'react-toastify';
 
-import {
-  First, Second, Third, Fourth, Fifth,
-} from '../components';
+import { First } from '../components';
+import { get, next, pre } from '../api/count';
 
 class Main extends Component {
+  countLoop = undefined;
+
   state = {
-    page: 0,
+    page: 1,
   };
 
-  nextPage = () => {
-    const { page } = this.state;
-    if (page === 5) return;
+  // componentDidMount = () => {
+  //   this.countLoop = setInterval(() => {
+  //     get().then((res) => {
+  //       this.setState({
+  //         page: res.data.count,
+  //       });
+  //     });
+  //   }, 300);
+  // };
 
-    this.setState({
-      page: page + 1,
+  // componentWillUnmount = () => {
+  //   clearInterval(this.countLoop);
+  // };
+
+  nextPage = () => {
+    next().then((res) => {
+      this.setState({
+        page: res.data.count,
+      });
     });
-    if (page === 3) {
-      toast.success('언제 다 해');
-    }
   };
 
   previousPage = (e) => {
-    const { page } = this.state;
-
-    if (page === 0) {
-      e.preventDefault();
-      return;
-    }
-
-    this.setState({
-      page: page - 1,
+    pre().then((res) => {
+      this.setState({
+        page: res.data.count,
+      });
     });
     e.preventDefault();
     return false;
@@ -48,34 +53,7 @@ class Main extends Component {
         ) : (
           undefined
         )}
-        {page === 1 ? (
-          <div>
-            <Second />
-          </div>
-        ) : (
-          undefined
-        )}
-        {page === 2 ? (
-          <div>
-            <Third />
-          </div>
-        ) : (
-          undefined
-        )}
-        {page === 3 ? (
-          <div>
-            <Fourth />
-          </div>
-        ) : (
-          undefined
-        )}
-        {page === 4 ? (
-          <div>
-            <Fifth />
-          </div>
-        ) : (
-          undefined
-        )}
+
         {page === 5 ? (
           <div>
             <First />

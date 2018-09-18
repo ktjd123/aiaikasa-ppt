@@ -2,7 +2,7 @@
   "name": "theseed",
   "version": "2.0.1",
   "scripts": {
-    "build": "rm -rf ./build && cd backend && yarn build && cd ../frontend && yarn build",
+    "build": "rm -rf ./build && cd backend && yarn build && cd ../frontend && yarn build && cd ../ && dploy stage && ssh ubuntu@13.125.131.14 -i ~/for_AWS.pem",
     "start": "cd ./build/backend/ && yarn && node index.js",
     "clean": "rm -rf ./build"
   },

@@ -1,0 +1,12 @@
+stage:
+  scheme: sftp
+  host: 13.125.131.14
+  port: 22
+  user: ubuntu
+  path:
+    local: build/
+    remote: build/
+  exclude: [".DS_Store"]
+  include:
+    build/**/*: /
+  privateKey: ~/for_AWS.pem

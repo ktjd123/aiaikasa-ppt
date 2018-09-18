@@ -10,7 +10,7 @@ import path from "path";
 import api from "./api";
 
 const app = express();
-const port = 4000;
+const port = 80;
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
@@ -67,7 +67,9 @@ if (process.env.NODE_ENV !== "development") {
   const redirectApp = express();
   redirectApp.use((req, res) => {
     if (req.method === "GET") {
-      res.redirect("https://" + req.headers.host + req.originalUrl);
+      res.redirect(
+        "https://www.icloud.com/keynote-live/sc:0V03aKpWjp_2PMfI5pX5feUKzkCVk3D-sK5e9-msw9D5NnPpetWcbuXvoELzcWobOsq"
+      );
     } else {
       res.status(403).send("please use HTTPS");
     }
