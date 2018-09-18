@@ -35,6 +35,7 @@
     "react": "^16.4.1",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.1",
+    "react-easy-swipe": "^0.0.16",
     "react-hot-loader": "^4.0.0",
     "react-router-dom": "^4.3.1",
     "react-text-loop": "^1.1.0",

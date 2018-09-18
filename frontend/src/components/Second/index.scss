@@ -1,0 +1,9 @@
+@import "utils";
+
+.second {
+  @include flex-column();
+
+  .erd {
+    width: 100vw;
+  }
+}

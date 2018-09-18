@@ -1,0 +1,14 @@
+@import "utils";
+
+.third {
+  @include flex-column();
+
+  .img-div {
+    @include flex();
+    width: 100vw;
+
+    img {
+      width: 50%;
+    }
+  }
+}

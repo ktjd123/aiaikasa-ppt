@@ -1,0 +1,16 @@
+@import "utils";
+
+.fourth {
+  @include flex-column();
+
+  .imgs {
+    @include flex();
+    flex-wrap: wrap;
+    img {
+      width: 400px;
+    }
+    img + img {
+      margin: 20px;
+    }
+  }
+}
