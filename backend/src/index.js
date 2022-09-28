@@ -12,9 +12,9 @@ import api from "./api";
 const app = express();
 const port = 80;
 
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  return res.status(500).json({ code: 0 });
+app.use(function (err, req, res, next) {
+	console.error(err.stack);
+	return res.status(500).json({ code: 0 });
 });
 
 app.use(bodyParser.json());
@@ -24,57 +24,57 @@ app.use(morgan("dev"));
 mongoose.Promise = global.Promise;
 mongoose.set("debug", true);
 mongoose.connect(
-  "mongodb://localhost:27017/theseed",
-  { useNewUrlParser: true },
-  (err, db) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log("\x1b[35m", "Connected to mongodb server");
-    }
-  }
+	"mongodb://localhost:27017/theseed",
+	{ useNewUrlParser: true },
+	(err, db) => {
+		if (err) {
+			console.error(err);
+		} else {
+			console.log("\x1b[35m", "Connected to mongodb server");
+		}
+	}
 );
 const mongoStore = connectMongo(session);
 
 app.use(
-  session({
-    secret: "fjso@jfjmx.3u0s.jfj2",
-    resave: false,
-    saveUninitialized: false,
-    rolling: true,
-    cookie: {
-      maxAge: 365 * (24 * 60 * 60 * 1000)
-    },
-    store: new mongoStore({
-      mongooseConnection: mongoose.connection,
-      ttl: 365 * (24 * 60 * 60 * 1000)
-    })
-  })
+	session({
+		secret: "fjso@jfjmx.3u0s.jfj2",
+		resave: false,
+		saveUninitialized: false,
+		rolling: true,
+		cookie: {
+			maxAge: 365 * (24 * 60 * 60 * 1000),
+		},
+		store: new mongoStore({
+			mongooseConnection: mongoose.connection,
+			ttl: 365 * (24 * 60 * 60 * 1000),
+		}),
+	})
 );
 
 app.use("/api", api);
 
 app.use(express.static(path.resolve(__dirname, "..", "frontend")));
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "..", "frontend", "index.html"));
+	res.sendFile(path.resolve(__dirname, "..", "frontend", "index.html"));
 });
 
 app.listen(port, () => {
-  console.log("\x1b[35m", "Api server is running at", port);
+	console.log("\x1b[35m", "Api server is running at", port);
 });
 
 if (process.env.NODE_ENV !== "development") {
-  const redirectApp = express();
-  redirectApp.use((req, res) => {
-    if (req.method === "GET") {
-      res.redirect(
-        "https://www.icloud.com/keynote-live/sc:0V03aKpWjp_2PMfI5pX5feUKzkCVk3D-sK5e9-msw9D5NnPpetWcbuXvoELzcWobOsq"
-      );
-    } else {
-      res.status(403).send("please use HTTPS");
-    }
-  });
-  redirectApp.listen(5000, () => {
-    console.log("", "Redirect server running on port 5000");
-  });
+	const redirectApp = express();
+	redirectApp.use((req, res) => {
+		if (req.method === "GET") {
+			res.redirect(
+				"https://www.icloud.com/keynote-live/sc:0V03aKpWjp_2PMfI5pX5feUKzkCVk3D-sK5e9-msw9D5NnPpetWcbuXvoELzcWobOsq"
+			);
+		} else {
+			res.status(403).send("please use HTTPS");
+		}
+	});
+	redirectApp.listen(1313, () => {
+		console.log("", "Redirect server running on port 5000");
+	});
 }
